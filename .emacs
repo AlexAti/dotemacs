@@ -39,19 +39,26 @@
 (use-package smart-tab)
 (use-package smart-yank)
 (use-package parinfer
-  :bind (("C-," . parinfer-toggle-mode))
+  :bind (:map parinfer-mode-map
+         ("M-r" . parinfer-raise-sexp)
+         ("<tab>" . parinfer-smart-tab:dwim-right-or-complete)
+         ("S-<tab>" . parinfer-smart-tab:dwim-left)
+         ("C-," . parinfer-toggle-mode))
   :init ; before load
-  (setq parinfer-extensions
-  '(defaults
-     pretty-parens
-     paredit
-     smart-tab
-     smart-yank))
+  (require 'ediff)
+  (setq ediff-window-setup-function 'ediff-setup-windows-plain)
+  (setq parinfer-lighters '(" Parinfer:Ind" . " Parinfer:Par"))
+  (setq parinfer-extensions '(defaults pretty-parens smart-tab smart-yank paredit))
+  (setq parinfer-auto-switch-indent-mode-when-closing t)
   :hook (clojure-mode
 	 emacs-lisp-mode
 	 common-lisp-mode
 	 lisp-mode)
-  :config nil) ; after load
+  :config ; after load
+  (parinfer-strategy-add 'default 'newline-and-indent)
+  (parinfer-strategy-add 'instantly
+    '(parinfer-smart-tab:dwim-right-or-complete
+      parinfer-smart-tab:dwim-left)))
 
 
 (use-package elpy
