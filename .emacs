@@ -34,7 +34,6 @@
           (org-agenda-list 1)
           (get-buffer "Org Agenda*"))))
 
-(use-package pretty-parens)
 (use-package paredit)
 (use-package smart-tab)
 (use-package smart-yank)
@@ -48,7 +47,7 @@
   (require 'ediff)
   (setq ediff-window-setup-function 'ediff-setup-windows-plain)
   (setq parinfer-lighters '(" Parinfer:Ind" . " Parinfer:Par"))
-  (setq parinfer-extensions '(defaults pretty-parens smart-tab smart-yank paredit))
+  (setq parinfer-extensions '(defaults smart-tab smart-yank paredit))
   (setq parinfer-auto-switch-indent-mode-when-closing t)
   :hook (clojure-mode
 	 emacs-lisp-mode
