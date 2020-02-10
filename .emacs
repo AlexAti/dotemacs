@@ -59,12 +59,18 @@
     '(parinfer-smart-tab:dwim-right-or-complete
       parinfer-smart-tab:dwim-left)))
 
-
 (use-package elpy
-  :ensure t
   :commands elpy-enable
   :init ;(with-eval-after-load 'python
           (elpy-enable))
+
+(use-package org
+  :bind (:map global-map
+              ("\C-cl" . org-store-link) ; to store links at any place
+              ("\C-ca" . org-agenda))
+  :init
+  (setq org-log-done t) ; timestamps when something is moved to DONE
+  (setq org-agenda-files '("C:\\Users\\aatienza\\Documents\\Org files")))
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
