@@ -12,6 +12,12 @@
   (setq auto-package-update-hide-results t)
   (auto-package-update-maybe))
 
+(use-package super-save
+  :config
+  (super-save-mode +1)
+  (setq super-save-auto-save-when-idle t)
+  (setq super-save-remote-files nil))
+
 (use-package  helm)
 (use-package  projectile)
 (use-package  helm-projectile)
