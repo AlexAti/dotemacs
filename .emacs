@@ -42,6 +42,9 @@
           (org-agenda-list 1)
           (get-buffer "Org Agenda*"))))
 
+(use-package rainbow-delimiters
+  :init
+  (add-hook 'prog-mode-hook 'rainbow-delimiters-mode))
 (use-package paredit)
 (use-package smart-tab)
 (use-package smart-yank)
