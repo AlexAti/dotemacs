@@ -78,8 +78,17 @@
 (use-package org
   :bind (:map global-map
               ("\C-cl" . org-store-link) ; to store links at any place
+              ("\C-cc" . org-capture)
               ("\C-ca" . org-agenda))
   :init
+  ;; Refiling options, from https://blog.aaronbieber.com/2017/03/19/organizing-notes-with-refile.htlm
+  (setq org-refile-targets '((nil :maxlevel . 9)
+                             (org-agenda-files :maxlevel . 9)))
+  (setq org-refile-use-outline-path t)                  ; Show full paths for refiling
+  (setq org-outline-path-complete-in-steps nil)         ; Refile in a single go
+  (setq org-refile-allow-creating-parent-nodes 'confirm)
+  ;; Capture options
+  (setq org-default-notes-file "C:\\Users\\aatienza\\Documents\\Org files/inbox.org")
   (setq org-log-done t) ; timestamps when something is moved to DONE
   (setq org-agenda-files '("C:\\Users\\aatienza\\Documents\\Org files")))
 
