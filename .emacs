@@ -70,10 +70,23 @@
     '(parinfer-smart-tab:dwim-right-or-complete
       parinfer-smart-tab:dwim-left)))
 
+(use-package exec-path-from-shell ; general use but added for finding python executable
+  :if (memq window-system '(mac ns x))
+  :config
+  (setq exec-path-from-shell-variables '("PATH" "PYTHONPATH"))
+  (exec-path-from-shell-initialize))
 (use-package elpy
   :commands elpy-enable
-  :init ;(with-eval-after-load 'python
-          (elpy-enable))
+  :init
+  (setq python-shell-interpreter "jupyter"
+        python-shell-interpreter-args "console --simple-prompt"
+        python-shell-prompt-detect-failure-warning nil)
+  (elpy-enable))
+
+(use-package flycheck ; an improvement over the built-in flymake (autocompletion)
+  :init
+  (setq elpy-modules (delq 'elpy-module-flymake elpy-modules))
+  (add-hook 'elpy-mode-hook 'flycheck-mode)) ; installed for python
 
 (use-package org
   :bind (:map global-map
