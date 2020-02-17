@@ -116,6 +116,7 @@
   (add-hook 'org-mode-hook
             (lambda ()
               (variable-pitch-mode 1)
+              (set-face-attribute 'org-table nil :inherit 'fixed-pitch) ; override variable pitch for tables
               visual-line-mode))
   :config
   (org-load-modules-maybe t)
