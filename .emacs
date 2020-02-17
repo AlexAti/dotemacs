@@ -94,6 +94,8 @@
               ("\C-cc" . org-capture)
               ("\C-ca" . org-agenda))
   :init
+  ;; Optional modules
+  (setq org-modules '(org-drill))
   ;; Refiling options, from https://blog.aaronbieber.com/2017/03/19/organizing-notes-with-refile.htlm
   (setq org-refile-targets '((nil :maxlevel . 9)
                              (org-agenda-files :maxlevel . 9)))
@@ -103,16 +105,23 @@
   ;; Capture options
   (setq org-default-notes-file "C:\\Users\\aatienza\\Documents\\Org files/inbox.org")
   (setq org-log-done t) ; timestamps when something is moved to DONE
-  (setq org-agenda-files '("C:\\Users\\aatienza\\Documents\\Org files")))
+  ;; Other agenda options
+  (setq org-agenda-files '("C:\\Users\\aatienza\\Documents\\Org files"))
+  :config
+  (setq org-ellipsis "⤵")
+  (org-load-modules-maybe t))
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(org-modules
+   (quote
+    (org-bbdb org-bibtex org-docview org-gnus org-info org-irc org-mhe org-rmail org-w3m org-drill)))
  '(package-selected-packages
    (quote
-    (elpy parinfer smart-yank smart-tab pretty-parens atom-one-dark-theme better-defaults magit clj-refactor clojure-mode helm-projectile projectile helm auto-package-update use-package-ensure-system-package))))
+    (org-drill elpy parinfer smart-yank smart-tab pretty-parens atom-one-dark-theme better-defaults magit clj-refactor clojure-mode helm-projectile projectile helm auto-package-update use-package-ensure-system-package))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
