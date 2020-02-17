@@ -113,9 +113,25 @@
   (setq org-log-done t) ; timestamps when something is moved to DONE
   ;; Other agenda options
   (setq org-agenda-files '("C:\\Users\\aatienza\\Documents\\Org files"))
+  (add-hook 'org-mode-hook
+            (lambda ()
+              (variable-pitch-mode 1)
+              visual-line-mode))
   :config
-  (setq org-ellipsis "⤵")
-  (org-load-modules-maybe t))
+  (org-load-modules-maybe t)
+  (setq org-startup-indented t
+        org-src-tab-acts-natively t)
+  (setq org-hide-emphasis-markers t
+        org-fontify-done-headline t
+        org-hide-leading-stars t
+        org-pretty-entities t
+        org-odd-levels-only t))
+
+(use-package org-bullets
+  :custom
+  (org-bullets-bullet-list '("◉" "○" "✸" "✿" "✜" "◆" "▶"))
+  (org-ellipsis " ⤵")
+  :hook (org-mode . org-bullets-mode))
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
