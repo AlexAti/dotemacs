@@ -136,6 +136,9 @@
   (org-ellipsis " ⤵")
   :hook (org-mode . org-bullets-mode))
 
+(setq org-replace-disputed-keys t)
+(windmove-default-keybindings) ; moving between windows (but clashes with org-mode todos and priorities, which I disabled in the line before)
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
