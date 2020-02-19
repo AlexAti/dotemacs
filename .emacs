@@ -4,6 +4,8 @@
 (set-keyboard-coding-system 'utf-8)
 (setq default-buffer-file-coding-system 'utf-8)
 
+(setq mac-right-option-modifier nil) ; liberating AltGr
+
 (require 'package)
 (add-to-list 'package-archives (cons "melpa" "https://melpa.org/packages/") t)
 (add-to-list 'package-archives (cons "org" "https://orgmode.org/elpa/") t)
@@ -138,6 +140,9 @@
   (org-bullets-bullet-list '("◉" "○" "✸" "✿" "✜" "◆" "▶"))
   (org-ellipsis " ⤵")
   :hook (org-mode . org-bullets-mode))
+
+(setq org-replace-disputed-keys t)
+(windmove-default-keybindings) ; moving between windows (but clashes with org-mode todos and priorities, which I disabled in the line before)
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
