@@ -133,7 +133,8 @@
         org-pretty-entities t
         org-odd-levels-only nil)
   (add-to-list 'org-modules 'org-drill t)
-  (add-to-list 'org-modules 'org-depend t))
+  (add-to-list 'org-modules 'org-depend t)
+  (setq org-todo-keywords '((sequence "TODO" "NEXT" "|" "DONE" "CANCELLED"))))
 
 (use-package org-bullets
   :custom
