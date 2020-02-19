@@ -136,6 +136,10 @@
   (add-to-list 'org-modules 'org-depend t)
   (setq org-todo-keywords '((sequence "TODO" "NEXT" "|" "DONE" "CANCELLED"))))
 
+(setq inhibit-compacting-font-caches t)
+;; this is for general unicode issues in windows, not only for org-bullets
+;; see https://github.com/sabof/org-bullets/issues/11for more details
+
 (use-package org-bullets
   :custom
   (org-bullets-bullet-list '("◉" "○" "✸" "✿" "✜" "◆" "▶"))
