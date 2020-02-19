@@ -6,6 +6,7 @@
 
 (require 'package)
 (add-to-list 'package-archives (cons "melpa" "https://melpa.org/packages/") t)
+(add-to-list 'package-archives (cons "org" "https://orgmode.org/elpa/") t)
 (package-initialize)
 
 (require 'use-package) ; we assume it is installed
@@ -95,13 +96,12 @@
   (add-hook 'elpy-mode-hook 'flycheck-mode)) ; installed for python
 
 (use-package org
+  :ensure org-plus-contrib
   :bind (:map global-map
               ("\C-cl" . org-store-link) ; to store links at any place
               ("\C-cc" . org-capture)
               ("\C-ca" . org-agenda))
   :init
-  ;; Optional modules
-  (setq org-modules '(org-drill))
   ;; Refiling options, from https://blog.aaronbieber.com/2017/03/19/organizing-notes-with-refile.htlm
   (setq org-refile-targets '((nil :maxlevel . 9)
                              (org-agenda-files :maxlevel . 9)))
@@ -119,14 +119,19 @@
               (set-face-attribute 'org-table nil :inherit 'fixed-pitch) ; override variable pitch for tables
               visual-line-mode))
   :config
-  (org-load-modules-maybe t)
+  (setq org-enforce-todo-dependencies t
+        org-load-modules-maybe t
+        org-enforce-todo-checkbox-dependencies t)
+  (setq org-agenda-dim-blocked-tasks t)
   (setq org-startup-indented t
         org-src-tab-acts-natively t)
   (setq org-hide-emphasis-markers t
         org-fontify-done-headline t
         org-hide-leading-stars t
         org-pretty-entities t
-        org-odd-levels-only t))
+        org-odd-levels-only nil)
+  (add-to-list 'org-modules 'org-drill t)
+  (add-to-list 'org-modules 'org-depend t))
 
 (use-package org-bullets
   :custom
@@ -141,7 +146,7 @@
  ;; If there is more than one, they won't work right.
  '(org-modules
    (quote
-    (org-bbdb org-bibtex org-docview org-gnus org-info org-irc org-mhe org-rmail org-w3m org-drill)))
+    (org-bbdb org-bibtex org-docview org-gnus org-info org-irc org-mhe org-rmail org-w3m org-drill org-depend)))
  '(package-selected-packages
    (quote
     (org-drill elpy parinfer smart-yank smart-tab pretty-parens atom-one-dark-theme better-defaults magit clj-refactor clojure-mode helm-projectile projectile helm auto-package-update use-package-ensure-system-package))))
