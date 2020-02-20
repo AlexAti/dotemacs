@@ -114,13 +114,17 @@
   (setq org-default-notes-file "C:\\Users\\aatienza\\Documents\\Org files/inbox.org")
   (setq org-log-done t) ; timestamps when something is moved to DONE
   ;; Other agenda options
-  (setq org-agenda-files '("C:\\Users\\aatienza\\Documents\\Org files"))
+  (setq org-agenda-files '("C:\\Users\\aatienza\\Documents\\Org files")
+        org-agenda-start-on-weekday nil
+        org-agenda-span 7
+        org-agenda-start-day "-2d")
   (add-hook 'org-mode-hook
             (lambda ()
               (variable-pitch-mode 1)
               (set-face-attribute 'org-table nil :inherit 'fixed-pitch) ; override variable pitch for tables
               visual-line-mode))
   :config
+  (setq org-special-ctrl-k t)
   (setq org-enforce-todo-dependencies t
         org-load-modules-maybe t
         org-enforce-todo-checkbox-dependencies t)
