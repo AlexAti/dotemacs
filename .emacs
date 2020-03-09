@@ -48,11 +48,7 @@
   ;; Not only configuring this package but all gui, really
   (load-theme 'atom-one-dark t)
   (tool-bar-mode -1)
-  (menu-bar-mode -1)
-  (setq initial-buffer-choice
-        (lambda ()
-          (org-agenda-list 1)
-          (get-buffer "Org Agenda*"))))
+  (menu-bar-mode -1))
 
 (use-package rainbow-delimiters
   :init
@@ -139,7 +135,9 @@
         org-hide-leading-stars t
         org-pretty-entities t
         org-odd-levels-only nil)
-
+  (add-hook 'after-init-hook '(lambda ()
+                                (org-tags-view t "TODO=\"NEXT\"")
+                                (delete-other-windows)))
   (add-to-list 'org-modules 'org-depend t)
   (setq org-todo-keywords '((sequence "TODO" "NEXT" "|" "DONE" "CANCELLED"))))
 
