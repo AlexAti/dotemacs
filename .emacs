@@ -139,7 +139,12 @@
                                 (org-tags-view t "TODO=\"NEXT\"")
                                 (delete-other-windows)))
   (add-to-list 'org-modules 'org-depend t)
-  (setq org-todo-keywords '((sequence "TODO" "NEXT" "|" "DONE" "CANCELLED"))))
+  (setq org-todo-keywords '((sequence "TODO" "NEXT" "|" "DONE" "CANCELLED")))
+  (setq org-capture-templates
+      '(("t" "Todo" entry (file+headline "" "To Dos")
+         "** TODO %?\n  %i\n  %a")
+        ("r" "Reunion" entry (file+headline "" "Reuniones")
+         "** (título)\n*** Asistentes\n-\n*** Preguntas\n-\n*** Notas\n-\n*** Mis tareas\n**** TODO \n*** Delegado\n-\n" :clock-in t))))
 
 (use-package org-drill
   :config
