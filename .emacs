@@ -139,9 +139,13 @@
         org-hide-leading-stars t
         org-pretty-entities t
         org-odd-levels-only nil)
-  (add-to-list 'org-modules 'org-drill t)
+
   (add-to-list 'org-modules 'org-depend t)
   (setq org-todo-keywords '((sequence "TODO" "NEXT" "|" "DONE" "CANCELLED"))))
+
+(use-package org-drill
+  :config
+  (add-to-list 'org-modules 'org-drill t))
 
 (setq inhibit-compacting-font-caches t)
 ;; this is for general unicode issues in windows, not only for org-bullets
