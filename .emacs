@@ -4,6 +4,9 @@
 (set-keyboard-coding-system 'utf-8)
 (setq default-buffer-file-coding-system 'utf-8)
 
+(set-face-attribute 'default nil
+                    :family "Consolas" :height 100)
+
 (setq mac-right-option-modifier nil) ; liberating AltGr
 
 (require 'package)
@@ -167,7 +170,7 @@
     (org-bbdb org-bibtex org-docview org-gnus org-info org-irc org-mhe org-rmail org-w3m org-drill org-depend)))
  '(package-selected-packages
    (quote
-    (org-drill elpy parinfer smart-yank smart-tab pretty-parens atom-one-dark-theme better-defaults magit clj-refactor clojure-mode helm-projectile projectile helm auto-package-update use-package-ensure-system-package))))
+    (transient all-the-icons org-drill elpy parinfer smart-yank smart-tab pretty-parens atom-one-dark-theme better-defaults magit clj-refactor clojure-mode helm-projectile projectile helm auto-package-update use-package-ensure-system-package))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
