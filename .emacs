@@ -148,7 +148,9 @@
 
 (use-package org-drill
   :config
-  (add-to-list 'org-modules 'org-drill t))
+  (add-to-list 'org-modules 'org-drill t)
+  (setq org-drill-save-buffers-after-drill-sessions-p nil)
+  (setq org-drill-scope 'agenda))
 
 (setq inhibit-compacting-font-caches t)
 ;; this is for general unicode issues in windows, not only for org-bullets
