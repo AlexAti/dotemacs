@@ -113,8 +113,9 @@
   (setq org-default-notes-file "C:\\Users\\aatienza\\Documents\\Org files/inbox.org")
   (setq org-log-done t) ; timestamps when something is moved to DONE
   ;; Other agenda options
-  (setq org-agenda-files '("C:\\Users\\aatienza\\Documents\\Org files"
-                           "~/Org files")
+  (setq org-agenda-files (if (eq system-type 'windows-nt)
+                             '("C:\\Users\\aatienza\\Documents\\Org files")
+                           '("~/Org files"))
         org-agenda-start-on-weekday nil
         org-agenda-span 7
         org-agenda-start-day "-2d")
@@ -170,23 +171,3 @@
 (add-hook 'org-shiftdown-final-hook 'windmove-down)
 (add-hook 'org-shiftright-final-hook 'windmove-right)
 
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(org-agenda-files
-   (quote
-    ("/Users/alejandro/Org files/deloitte-caixa.org" "/Users/alejandro/Org files/deloitte-corrupcion.org" "/Users/alejandro/Org files/deloitte-pequeprojs.org" "/Users/alejandro/Org files/deloitte-resp-fsi.org" "/Users/alejandro/Org files/inbox.org" "/Users/alejandro/Org files/org-mode-notes.org" "/Users/alejandro/Org files/personal-cacharro.org" "/Users/alejandro/Org files/personal-tecnico.org")))
- '(org-modules
-   (quote
-    (org-bbdb org-bibtex org-docview org-gnus org-info org-irc org-mhe org-rmail org-w3m org-drill org-depend)))
- '(package-selected-packages
-   (quote
-    (transient all-the-icons org-drill elpy parinfer smart-yank smart-tab pretty-parens atom-one-dark-theme better-defaults magit clj-refactor clojure-mode helm-projectile projectile helm auto-package-update use-package-ensure-system-package))))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
