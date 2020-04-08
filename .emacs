@@ -59,7 +59,15 @@
 (use-package rainbow-delimiters
   :init
   (add-hook 'prog-mode-hook 'rainbow-delimiters-mode))
-(use-package paredit)
+(use-package paredit
+  :ensure t
+  :hook (clojure-mode
+         emacs-lisp-mode
+         common-lisp-mode
+         ielm-mode
+         eval-expression-minibuffer-setup
+         lisp-interaction-mode
+         lisp-mode))
 (use-package smart-tab)
 (use-package smart-yank)
 (use-package parinfer
@@ -77,6 +85,9 @@
   :hook (clojure-mode
 	 emacs-lisp-mode
 	 common-lisp-mode
+         ielm-mode
+         eval-expression-minibuffer-setup
+         lisp-interaction-mode
 	 lisp-mode)
   :config ; after load
   (parinfer-strategy-add 'default 'newline-and-indent)
