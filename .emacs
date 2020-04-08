@@ -39,6 +39,12 @@
 (use-package  cider)
 
 (use-package  magit)
+  ;; :config
+  ;; (if (eq system-type 'windows-nt)
+  ;;     (progn
+  ;;       (setq exec-path (add-to-list 'exec-path "C:/Program Files/Git/bin"))
+  ;;       (setenv "PATH" (concat "C:\\Program Files\\Git\\bin;" (getenv "PATH"))))))
+
 (use-package  git-gutter
   :init (global-git-gutter-mode t))
 
