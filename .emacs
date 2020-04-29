@@ -162,8 +162,10 @@
   (setq org-capture-templates
       '(("t" "Todo" entry (file+headline "" "To Dos")
          "** TODO %?\n  %i\n  %a")
+        ("n" "Nota" entry (file+headline "" "Notas")
+         "** (título de nota)")
         ("r" "Reunion" entry (file+headline "" "Reuniones")
-         "** (título)\n*** Asistentes\n-\n*** Preguntas\n-\n*** Notas\n-\n*** Mis tareas\n**** TODO \n*** Delegado\n-\n" :clock-in t))))
+         "** (asunto de la reunión)\n*** Asistentes\n-\n*** Preguntas\n-\n*** Notas\n-\n*** Mis tareas\n**** TODO \n*** Delegado\n-\n" :clock-in t))))
 
 (use-package org-drill
   :config
