@@ -22,7 +22,7 @@
   :config
   (setq auto-package-update-delete-old-versions t)
   (setq auto-package-update-hide-results t)
-  (auto-package-update-maybe))
+  (auto-package-update-at-time (format-time-string "%H:%M:%S" (time-add (current-time) 120)))) ; Update will happen 120 seconds after startup
 
 (use-package super-save
   :config
