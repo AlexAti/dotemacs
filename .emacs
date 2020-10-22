@@ -167,6 +167,11 @@
         ("r" "Reunion" entry (file+headline "" "Reuniones")
          "** (asunto de la reunión)\n*** Asistentes\n-\n*** Preguntas\n-\n*** Notas\n-\n*** Mis tareas\n**** TODO \n*** Delegado\n-\n" :clock-in t))))
 
+(use-package ob-clojure
+  :requires (org cider)
+  :config
+  (setq org-babel-clojure-backend 'cider))
+
 (use-package org-drill
   :config
   (add-to-list 'org-modules 'org-drill t)
