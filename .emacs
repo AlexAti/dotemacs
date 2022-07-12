@@ -97,6 +97,11 @@
    :config
    (add-hook 'after-init-hook #'global-flycheck-mode))
 
+(use-package dumb-jump
+  :config
+  (add-hook 'xref-backend-functions #'dumb-jump-xref-activate)
+  (setq xref-show-definitions-function #'xref-show-definitions-completing-read))
+
 (use-package paredit
   :ensure t
   :config
