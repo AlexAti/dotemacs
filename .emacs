@@ -90,12 +90,10 @@
   (add-hook 'prog-mode-hook 'rainbow-delimiters-mode))
 
 ;; Programming lisp
-(use-package clojure-mode)
+(use-package flycheck-clj-kondo)
+(use-package clojure-mode :config (require 'flycheck-clj-kondo))
 (use-package clj-refactor)
 (use-package cider)
-(use-package flycheck-clj-kondo
-   :config
-   (add-hook 'after-init-hook #'global-flycheck-mode))
 
 (use-package dumb-jump
   :config
@@ -151,6 +149,7 @@
   (setq org-default-notes-file "C:\\Users\\aatienza\\Documents\\Org files/inbox.org")
   (setq org-log-done t) ; timestamps when something is moved to DONE
   ;; Other agenda options
+  (setq org-agenda-skip-unavailable-files t) ; to avoid a warning at init
   (setq org-agenda-files (if (eq system-type 'windows-nt)
                              '("C:\\Users\\aatienza\\Documents\\Org files")
                            '("~/Org files"))
