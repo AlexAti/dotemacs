@@ -18,14 +18,47 @@
 (setq custom-file (concat user-emacs-directory "custom.el")) ; emacs does not touch .emacs anymore with this
 (load custom-file t)
 
+;; Avoid showing warnings when compiling packages
+(add-to-list 'display-buffer-alist
+             '("\\`\\*\\(Warnings\\|Compile-Log\\)\\*\\'"
+               (display-buffer-no-window)
+               (allow-no-window . t)))
+
+;; Make C-g a bit more helpful
+(defun prot/keyboard-quit-dwim ()
+  "Do-What-I-Mean behaviour for a general `keyboard-quit'.
+
+The generic `keyboard-quit' does not do the expected thing when
+the minibuffer is open.  Whereas we want it to close the
+minibuffer, even without explicitly focusing it.
+
+The DWIM behaviour of this command is as follows:
+
+- When the region is active, disable it.
+- When a minibuffer is open, but not focused, close the minibuffer.
+- When the Completions buffer is selected, close it.
+- In every other case use the regular `keyboard-quit'."
+  (interactive)
+  (cond
+   ((region-active-p)
+    (keyboard-quit))
+   ((derived-mode-p 'completion-list-mode)
+    (delete-completion-window))
+   ((> (minibuffer-depth) 0)
+    (abort-recursive-edit))
+   (t
+    (keyboard-quit))))
+
+(define-key global-map (kbd "C-g") #'prot/keyboard-quit-dwim)
+
 ;; Package mgmt initialization
 (eval-when-compile
   (require 'package)
   (add-to-list 'package-archives (cons "melpa" "https://melpa.org/packages/") t)
   (add-to-list 'package-archives (cons "org" "https://orgmode.org/elpa/") t)
   (package-initialize)
-  (require 'use-package) ; we assume it is installed
-  (require 'use-package-ensure) ; we assume it is installed
+  (require 'use-package)                ; we assume it is installed
+  (require 'use-package-ensure)         ; we assume it is installed
   (setq use-package-always-ensure t) ; ensures all assumptions BUT! forces repo contact at each startup to try install if a package doesnt exist
   )
 
@@ -40,7 +73,7 @@
 (use-package atom-one-dark-theme
   :config
   ;; Not only configuring this package but all gui, really
-  (load-theme 'atom-one-dark t)
+  (load-theme 'wombat t) ; (load-theme 'atom-one-dark t)
   (when (display-graphic-p)
     (tool-bar-mode -1)
     (scroll-bar-mode -1))
@@ -51,6 +84,10 @@
   (super-save-mode +1)
   (setq super-save-auto-save-when-idle t)
   (setq super-save-remote-files nil))
+
+(use-package delsel ; Delete the selected text upon text insertion
+  :ensure nil                ; no need to install it as it is built-in
+  :hook (after-init . delete-selection-mode))
 
 ;; Completion helpers
 (use-package helm)
@@ -83,7 +120,10 @@
   ;;       (setenv "PATH" (concat "C:\\Program Files\\Git\\bin;" (getenv "PATH"))))))
 
 (use-package git-gutter
-  :init (global-git-gutter-mode t))
+  :init
+  (global-git-gutter-mode t)
+  (global-set-key (kbd "C-x p") 'git-gutter:previous-hunk)
+  (global-set-key (kbd "C-x n") 'git-gutter:next-hunk))
 
 (use-package rainbow-delimiters
   :init
